@@ -5,9 +5,11 @@ import com.elf.vipForElf.domain.test.repository.JPA.TestJPARepository;
 import com.elf.vipForElf.domain.test.repository.TestRepository;
 import com.elf.vipForElf.domain.test.vo.TestVO;
 import com.elf.vipForElf.web.dto.TestDTO;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class TestRepositoryImpl implements TestRepository {
     private final TestJPARepository testJPARepository;
 

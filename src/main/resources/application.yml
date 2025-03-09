@@ -1,3 +1,30 @@
 server:
   port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5423/db_elf
+    username: develf
+    password: 2025devElf
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 개발 환경에서는 update, 운영 환경에서는 validate 또는 none 사용 권장
+    show-sql: true      # JPA가 실행하는 SQL을 콘솔에 출력
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+# 로그 설정 (SQL 및 바인딩 값까지 자세히 출력)
+logging:
+  level:
+    root: DEBUG  # 전체 애플리케이션 로그 레벨을 DEBUG로 설정
+    #    org.hibernate.SQL: DEBUG
+    #    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+  file:
+    path: /var/log/myapp
+    name: application.log
+
 
