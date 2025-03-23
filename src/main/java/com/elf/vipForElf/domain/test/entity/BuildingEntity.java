@@ -27,8 +27,8 @@ public class BuildingEntity {
     @Column(name = "business_number", length = 50)
     private String businessNumber;
 
-    @Column(name = "zipcode")
-    private Integer zipcode;
+    @Column(name = "zipcode", length = 5)
+    private String zipcode;
 
     @Column(name = "create_date")
     private OffsetDateTime createDate = OffsetDateTime.now();
