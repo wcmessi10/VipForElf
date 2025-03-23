@@ -26,4 +26,15 @@ public class BuildingController {
     public ResponseDTO<?> getBuildingById(@RequestParam Long id){
         return new ResponseDTO<>(buildingService.getBuildingById(id));
     }
+
+    // 빌딩 리스트 조회 TODO(최신순, 조회순 가능하게)
+    @GetMapping(value ="/getBuildingList")
+    public ResponseDTO<?> getBuildingList(@RequestParam String searchCondiiton, @RequestParam int page, @RequestParam int size){
+        return new ResponseDTO<>(buildingService.getBuildingList(searchCondiiton, page, size));
+    }
+
+    @DeleteMapping(value = "/deleteBuildingById")
+    public ResponseDTO<?> deleteBuildingById(@RequestParam Long id){
+        return new ResponseDTO<>(buildingService.deleteBuildingById(id));
+    }
 }
