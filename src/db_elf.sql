@@ -5,7 +5,7 @@ CREATE TABLE if not exists elf_t_building (
     address VARCHAR(255),
     building_number VARCHAR(10),
     business_number VARCHAR(50),
-    zipcode Integer,
+    zipcode VARCHAR(5),
     create_date TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 

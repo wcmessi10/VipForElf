@@ -1,5 +1,6 @@
 package com.elf.vipForElf.domain.test.entity;
 
+import com.elf.vipForElf.domain.test.vo.BuildingInfoVO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,4 +33,12 @@ public class BuildingEntity {
 
     @Column(name = "create_date")
     private OffsetDateTime createDate = OffsetDateTime.now();
+
+    public BuildingEntity(BuildingInfoVO buildingInfoVO){
+        this.buildingName = buildingInfoVO.getBuildingName();
+        this.buildingNumber = buildingInfoVO.getBuildingNumber();
+        this.businessNumber = buildingInfoVO.getBusinessNumber();
+        this.address = buildingInfoVO.getAddress();
+        this.zipcode = buildingInfoVO.getZipcode();
+    }
 }
