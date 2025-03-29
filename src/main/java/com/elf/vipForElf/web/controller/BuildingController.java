@@ -29,7 +29,8 @@ public class BuildingController {
 
     // 빌딩 리스트 조회 TODO(최신순, 조회순 가능하게)
     @GetMapping(value ="/getBuildingList")
-    public ResponseDTO<?> getBuildingList(@RequestParam String searchCondiiton, @RequestParam int page, @RequestParam int size){
+    public ResponseDTO<?> getBuildingList(@RequestParam(required = false) String searchCondiiton, @RequestParam int page, @RequestParam int size){
+        if(searchCondiiton==null) searchCondiiton="";
         return new ResponseDTO<>(buildingService.getBuildingList(searchCondiiton, page, size));
     }
 

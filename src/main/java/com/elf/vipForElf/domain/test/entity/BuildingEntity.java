@@ -3,6 +3,7 @@ package com.elf.vipForElf.domain.test.entity;
 import com.elf.vipForElf.domain.test.vo.BuildingInfoVO;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
@@ -11,6 +12,7 @@ import java.time.OffsetDateTime;
 @Table(name = "elf_t_building")
 @Getter
 @Setter
+@NoArgsConstructor
 public class BuildingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
