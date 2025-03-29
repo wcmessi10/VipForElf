@@ -23,7 +23,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
     @Override
     public BuildingInfoVO create(BuildingInfoVO buildingInfoVO) {
         BuildingEntity buildingEntity = new BuildingEntity(buildingInfoVO);
-        if(!existsByBuildingNumber(buildingEntity.getBuildingNumber())){
+        if(existsByBuildingNumber(buildingEntity.getBuildingNumber())){
             throw new IllegalArgumentException("Already existed Building Number");
         }
         return new BuildingInfoVO(buildingJPARepository.save(buildingEntity));
