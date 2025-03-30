@@ -23,4 +23,10 @@ public class FloorController {
     public ResponseDTO<?> getFloorById(@RequestParam Long id){
         return new ResponseDTO<>(floorService.getFloorById(id));
     }
+
+    @GetMapping(value = "/getFloorList")
+    public ResponseDTO<?> getFloorList(@RequestParam(required = false) String searchCondition, Integer page, Integer size){
+        if(searchCondition==null) searchCondition="";
+        return new ResponseDTO<>(floorService.getFloorList(searchCondition,page,size));
+    }
 }

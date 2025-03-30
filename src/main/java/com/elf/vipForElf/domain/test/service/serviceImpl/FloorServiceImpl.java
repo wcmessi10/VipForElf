@@ -6,8 +6,13 @@ import com.elf.vipForElf.domain.test.service.BuildingService;
 import com.elf.vipForElf.domain.test.service.FloorService;
 import com.elf.vipForElf.domain.test.vo.BuildingInfoVO;
 import com.elf.vipForElf.domain.test.vo.FloorInfoVO;
+import com.elf.vipForElf.domain.test.vo.FloorListVO;
 import com.elf.vipForElf.web.dto.NewFloorDTO;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FloorServiceImpl implements FloorService {
@@ -32,5 +37,14 @@ public class FloorServiceImpl implements FloorService {
     @Override
     public FloorInfoVO getFloorById(Long id) {
         return floorRepository.getFloorById(id);
+    }
+
+    @Override
+    public List<FloorListVO> getFloorList(String searchCondition, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page,size);
+        if(searchCondition.equals("")){
+            return floorRepository.findAll(pageable);
+        }
+        return floorRepository.findBySearchCondition(searchCondition,pageable);
     }
 }
