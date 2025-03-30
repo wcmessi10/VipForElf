@@ -5,4 +5,5 @@ import com.elf.vipForElf.web.dto.NewFloorDTO;
 
 public interface FloorService {
     FloorInfoVO createFloor(NewFloorDTO newFloorDTO) throws IllegalAccessException;
+    FloorInfoVO getFloorById(Long id);
 }

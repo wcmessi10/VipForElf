@@ -18,4 +18,9 @@ public class FloorController {
     public ResponseDTO<?> createFloor(@RequestBody NewFloorDTO newFloorDTO) throws IllegalAccessException {
         return new ResponseDTO<>(floorService.createFloor(newFloorDTO));
     }
+
+    @GetMapping(value = "/getFloorById")
+    public ResponseDTO<?> getFloorById(@RequestParam Long id){
+        return new ResponseDTO<>(floorService.getFloorById(id));
+    }
 }

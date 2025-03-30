@@ -19,4 +19,12 @@ public class FloorRepositoryImpl implements FloorRepository {
         FloorEntity floorEntity = new FloorEntity().floorEntity(floorInfoVO);
         return new FloorInfoVO(floorJPARepository.save(floorEntity));
     }
+
+    @Override
+    public FloorInfoVO getFloorById(Long id) {
+        FloorEntity floorEntity = floorJPARepository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("No Floor by this id")
+        );
+        return new FloorInfoVO(floorEntity);
+    }
 }

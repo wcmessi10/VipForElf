@@ -28,4 +28,9 @@ public class FloorServiceImpl implements FloorService {
         FloorInfoVO floorInfoVO = new FloorInfoVO(newFloorDTO,buildingEntity);
         return floorRepository.createFloor(floorInfoVO);
     }
+
+    @Override
+    public FloorInfoVO getFloorById(Long id) {
+        return floorRepository.getFloorById(id);
+    }
 }
