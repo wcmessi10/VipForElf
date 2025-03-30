@@ -1,5 +1,6 @@
 package com.elf.vipForElf.domain.test.service.serviceImpl;
 
+import com.elf.vipForElf.domain.test.entity.BuildingEntity;
 import com.elf.vipForElf.domain.test.repository.BuildingRepository;
 import com.elf.vipForElf.domain.test.service.BuildingService;
 import com.elf.vipForElf.domain.test.vo.BuildingInfoVO;
@@ -48,6 +49,16 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public String deleteBuildingById(Long id) {
         return buildingRepository.deleteBuildingById(id);
+    }
+
+    @Override
+    public Boolean existById(Long id) {
+        return buildingRepository.existsById(id);
+    }
+
+    @Override
+    public BuildingEntity getBuildingEntityById(Long id) {
+        return buildingRepository.getBuildingEntityById(id);
     }
 
 

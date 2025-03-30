@@ -66,6 +66,11 @@ public class BuildingRepositoryImpl implements BuildingRepository {
         return "Failed Delete because this is not exist";
     }
 
+    @Override
+    public BuildingEntity getBuildingEntityById(Long id) {
+        return buildingJPARepository.findById(id).get();
+    }
+
     public boolean existsByBuildingNumber(String buildingNumber){
         return buildingJPARepository.existsByBuildingNumber(buildingNumber);
     }

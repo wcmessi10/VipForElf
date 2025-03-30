@@ -1,13 +1,16 @@
 package com.elf.vipForElf.domain.test.entity;
 
+import com.elf.vipForElf.domain.test.vo.FloorInfoVO;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "elf_t_floor")
 @Getter
 @Setter
+@NoArgsConstructor
 public class FloorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +26,11 @@ public class FloorEntity {
     @JoinColumn(name = "building_id", nullable = false)
     private BuildingEntity building;
 
+    public FloorEntity floorEntity(FloorInfoVO floorInfoVO){
+        FloorEntity floorEntity = new FloorEntity();
+        floorEntity.setFloorNumber(floorInfoVO.getFloorNumber());
+        floorEntity.setPurpose(floorInfoVO.getPurpose());
+        floorEntity.setBuilding(floorInfoVO.getBuildingEntity());
+        return floorEntity;
+    }
 }
