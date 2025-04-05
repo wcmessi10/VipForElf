@@ -1,5 +1,6 @@
 package com.elf.vipForElf.domain.test.entity;
 
+import com.elf.vipForElf.domain.test.vo.AreaInfoVO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,4 +34,10 @@ public class AreaEntity {
     @ManyToOne
     @JoinColumn(name = "floor_id", nullable = false)
     private FloorEntity floor;
+
+    public AreaEntity(AreaInfoVO areaInfoVO){
+        this.roomNumber = areaInfoVO.getRoomNumber();
+        this.areaSize = areaInfoVO.getAreaSize();
+        this.floor = areaInfoVO.getFloorEntity();
+    }
 }

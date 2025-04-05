@@ -1,6 +1,7 @@
 package com.elf.vipForElf.domain.test.service.serviceImpl;
 
 import com.elf.vipForElf.domain.test.entity.BuildingEntity;
+import com.elf.vipForElf.domain.test.entity.FloorEntity;
 import com.elf.vipForElf.domain.test.repository.FloorRepository;
 import com.elf.vipForElf.domain.test.service.BuildingService;
 import com.elf.vipForElf.domain.test.service.FloorService;
@@ -46,5 +47,10 @@ public class FloorServiceImpl implements FloorService {
             return floorRepository.findAll(pageable);
         }
         return floorRepository.findBySearchCondition(searchCondition,pageable);
+    }
+
+    @Override
+    public FloorEntity getFloorEntityById(Long id) {
+        return floorRepository.getFloorEntityById(id);
     }
 }

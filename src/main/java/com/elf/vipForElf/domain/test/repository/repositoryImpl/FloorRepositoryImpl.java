@@ -34,6 +34,11 @@ public class FloorRepositoryImpl implements FloorRepository {
     }
 
     @Override
+    public FloorEntity getFloorEntityById(Long id) {
+        return floorJPARepository.findById(id).orElseThrow();
+    }
+
+    @Override
     public List<FloorListVO> findAll(Pageable pageable) {
         return floorJPARepository.findAll(pageable).stream().map(
                 FloorListVO::new
