@@ -28,3 +28,16 @@ logging:
     name: application.log
 
 
+#https://velog.io/@hanqjun2660/API-%EB%AC%B8%EC%84%9C%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%A3%BC%EB%8A%94-Swagger
+springdoc:
+  version: V.0.0.1
+  swagger-ui:
+    path: /swagger.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+  api-docs:
+    path: /api-docs
+
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
