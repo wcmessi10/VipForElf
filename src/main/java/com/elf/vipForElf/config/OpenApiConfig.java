@@ -12,9 +12,9 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI openAPI(@Value("${springdoc.version}") String springdocVersion) {
         Info info = new Info()
-                .title("제목")
+                .title("VipForElf")
                 .version(springdocVersion)
-                .description("설명");
+                .description("Api Docs 'Vip For Elf'");
 
         return new OpenAPI()
                 .components(new Components())
