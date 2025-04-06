@@ -5,9 +5,14 @@ import com.elf.vipForElf.domain.test.repository.AreaRepository;
 import com.elf.vipForElf.domain.test.service.AreaService;
 import com.elf.vipForElf.domain.test.service.FloorService;
 import com.elf.vipForElf.domain.test.vo.AreaInfoVO;
+import com.elf.vipForElf.domain.test.vo.AreaListVO;
 import com.elf.vipForElf.web.dto.MoveInAreaDTO;
 import com.elf.vipForElf.web.dto.NewAreaDTO;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AreaServiceImpl implements AreaService {
@@ -37,6 +42,38 @@ public class AreaServiceImpl implements AreaService {
         AreaInfoVO areaInfoVO = new AreaInfoVO(moveInAreaDTO);
         areaRepository.update(areaInfoVO);
         return null;
+    }
+
+    @Override
+    public AreaInfoVO findAreaById(Long id) {
+        AreaInfoVO areaInfoVO = areaRepository.findById(id);
+        return null;
+    }
+
+    @Override
+    public List<AreaListVO> getAreaList(String searchCondition, int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        if(searchCondition.isEmpty()){
+            List<AreaListVO> areaListVOList = areaRepository.findAll(pageable);
+            return areaListVOList;
+        }else{
+            List<AreaListVO> areaListVOList= areaRepository.findAreaBySearchCondition(searchCondition,pageable);
+            return areaListVOList;
+        }
+    }
+
+    @Override
+    public List<AreaListVO> getAreaListByFloor(Long floorId) {
+        return areaRepository.findByFloorId(floorId);
+    }
+
+    @Override
+    public String deleteById(Long id) {
+        if(areaRepository.deleteById(id)){
+            return "Delete Complete";
+        }else{
+            throw new IllegalArgumentException("Wrong Area id");
+        }
     }
 
     private Boolean roomNumberCheck(Long floorId, String roomNumber){
