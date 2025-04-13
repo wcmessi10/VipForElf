@@ -1,8 +1,8 @@
 package com.elf.vipForElf.web.controller;
 
-import com.elf.vipForElf.domain.test.service.AreaService;
-import com.elf.vipForElf.domain.test.vo.AreaInfoVO;
-import com.elf.vipForElf.domain.test.vo.AreaListVO;
+import com.elf.vipForElf.domain.area.service.AreaService;
+import com.elf.vipForElf.domain.area.vo.AreaInfoVO;
+import com.elf.vipForElf.domain.area.vo.AreaListVO;
 import com.elf.vipForElf.web.dto.MoveInAreaDTO;
 import com.elf.vipForElf.web.dto.NewAreaDTO;
 import com.elf.vipForElf.web.dto.ResponseDTO;

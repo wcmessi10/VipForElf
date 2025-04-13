@@ -1,12 +1,11 @@
 package com.elf.vipForElf.web.controller;
 
-import com.elf.vipForElf.domain.test.service.BuildingService;
-import com.elf.vipForElf.domain.test.vo.BuildingInfoVO;
-import com.elf.vipForElf.domain.test.vo.BuildingListVO;
+import com.elf.vipForElf.domain.building.service.BuildingService;
+import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
+import com.elf.vipForElf.domain.building.vo.BuildingListVO;
 import com.elf.vipForElf.web.dto.NewBuildingDTO;
 import com.elf.vipForElf.web.dto.ResponseDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
