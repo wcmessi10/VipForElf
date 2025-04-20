@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
 }
 
 group = 'com.elf'
@@ -38,4 +39,28 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy('jacocoTestReport', 'jacocoTestCoverageVerification')
+
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.40  // 처음엔 40%로 시작
+			}
+		}
+	}
+}
+
+
+jacocoTestReport {
+	reports {
+		html.required = true
+		xml.required = true
+	}
+}
+
+jacoco {
+	toolVersion = "0.8.10"  // 사용할 JaCoCo 버전 지정 (최신권장)
 }
