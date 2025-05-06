@@ -28,7 +28,7 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public AreaInfoVO createArea(NewAreaDTO newAreaDTO) {
-        if(roomNumberCheck(newAreaDTO.getFloorId(), newAreaDTO.getRoomNumber())){
+        if(!roomNumberCheck(newAreaDTO.getFloorId(), newAreaDTO.getRoomNumber())){
             FloorEntity floorEntity = floorService.getFloorEntityById(newAreaDTO.getFloorId());
             AreaInfoVO areaInfoVO = new AreaInfoVO(newAreaDTO,floorEntity);
             return areaRepository.createArea(areaInfoVO);
@@ -40,8 +40,7 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public AreaInfoVO moveIn(MoveInAreaDTO moveInAreaDTO) {
         AreaInfoVO areaInfoVO = new AreaInfoVO(moveInAreaDTO);
-        areaRepository.update(areaInfoVO);
-        return null;
+        return areaRepository.update(areaInfoVO);
     }
 
     @Override

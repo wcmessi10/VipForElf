@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: dev  # 기본은 dev로 켜지게 설정
+    active: test  # 기본은 dev로 켜지게 설정
 
 # 로그 설정 (SQL 및 바인딩 값까지 자세히 출력)
 logging:
