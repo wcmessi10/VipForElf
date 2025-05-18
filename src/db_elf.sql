@@ -106,3 +106,29 @@ comment on column elf_t_real_estate_agency.regist_dt is '중개사 등록 일자
 comment on column elf_t_real_estate_agency.contact is '중개사 연락처';
 comment on column elf_t_real_estate_agency.description is '중개사 설명';
 
+
+create table if not exists elf_t_real_estate_listing(
+	id SERIAL primary key,						-- 매물 리스트 id
+	listing_type varchar(10) not null,			-- 매물 타입(건물 or 공간)
+	listing_id Integer not null,				-- 매물 id (건물이면 건물 id, 공간이면 공간 id)
+	occupancy_type varchar(15) not null,			-- 계약 타입코드(임대차 계약, 공유 오피스, 사무실 분양)
+	sale_price     NUMERIC(15, 2) default null, -- 사무실 분양가
+	deposit        NUMERIC(15, 2) default null, -- 임대차 보증금
+	monthly_rent   NUMERIC(15, 2) default null, -- 월세 또는 공유오피스 요금
+	status varchar(20) default 'REGIST',		-- 매물 상태값(등록, 완료, 취소 등)
+	real_estate_agency_id Integer not null,		-- 중개사 id
+	constraint fk_real_estate_agency
+	foreign key (real_estate_agency_id) references elf_t_real_estate_agency (id)
+	on delete cascade
+);
+
+comment on table elf_t_real_estate_listing is '부동산 매물';
+comment on column elf_t_real_estate_listing.id is '매물 리스트 id';
+comment on column elf_t_real_estate_listing.listing_type is '매물 타입(건물 or 공간)';
+comment on column elf_t_real_estate_listing.listing_id is '매물 id (건물이면 건물 id, 공간이면 공간 id)';
+comment on column elf_t_real_estate_listing.occupancy_type is '계약 타입코드(임대차 계약, 공유 오피스, 사무실 분양)';
+comment on column elf_t_real_estate_listing.sale_price is '사무실 분양가';
+comment on column elf_t_real_estate_listing.deposit is '임대차 보증금';
+comment on column elf_t_real_estate_listing.monthly_rent is '월세 또는 공유오피스 요금';
+comment on column elf_t_real_estate_listing.status is '매물 상태값(등록, 완료, 취소 등)';
+comment on column elf_t_real_estate_listing.real_estate_agency_id is '중개사 id';
