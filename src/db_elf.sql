@@ -90,3 +90,19 @@ ALTER TABLE elf_t_move_in_history
 ADD CONSTRAINT fk_area_history
 FOREIGN KEY (area_id) REFERENCES elf_t_area(id);
 
+-- elf_t_real_estate_agency 부동산 테이블 추가
+create table if not exists elf_t_real_estate_agency(
+	id SERIAL primary key,						  		-- 중개사 id (자동 증가)
+	real_estate_agency_name varchar(30) not null, 		-- 중개사 이름
+	regist_dt TIMESTAMP with TIME zone default now(), 	-- 중개사 등록 일자
+	contact VARCHAR(15) not null,						-- 중개사 연락처
+	description VARCHAR(1000) not null					-- 중개사 설명
+);
+
+comment on table elf_t_real_estate_agency is '부동산 테이블';
+comment on column elf_t_real_estate_agency.id is '중개사 id (자동 증가)';
+comment on column elf_t_real_estate_agency.real_estate_agency_name is '중개사 이름';
+comment on column elf_t_real_estate_agency.regist_dt is '중개사 등록 일자';
+comment on column elf_t_real_estate_agency.contact is '중개사 연락처';
+comment on column elf_t_real_estate_agency.description is '중개사 설명';
+
