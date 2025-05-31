@@ -132,3 +132,38 @@ comment on column elf_t_real_estate_listing.deposit is '임대차 보증금';
 comment on column elf_t_real_estate_listing.monthly_rent is '월세 또는 공유오피스 요금';
 comment on column elf_t_real_estate_listing.status is '매물 상태값(등록, 완료, 취소 등)';
 comment on column elf_t_real_estate_listing.real_estate_agency_id is '중개사 id';
+
+
+CREATE TABLE elf_t_contract (
+    contract_id BIGSERIAL PRIMARY KEY,
+
+    real_estate_agency_id BIGINT NOT NULL,
+    land_lord_id VARCHAR(255),
+    real_estate_listing_id BIGINT,
+
+    contract_pdf_link TEXT,
+    contract_status VARCHAR(50),
+
+    regist_dt TIMESTAMP,
+    last_update_dt TIMESTAMP,
+    move_in_dt TIMESTAMP,
+
+    CONSTRAINT fk_real_estate_agency
+        FOREIGN KEY (real_estate_agency_id)
+        REFERENCES elf_t_real_estate_agency (id),
+
+    CONSTRAINT fk_real_estate_listing
+        FOREIGN KEY (real_estate_listing_id)
+        REFERENCES elf_t_real_estate_listing (id)
+);
+
+comment on table elf_t_contract is '부동산 계약';
+comment on column elf_t_contract.contract_id is '계약 id';
+comment on column elf_t_contract.real_estate_agency_id is '계약 담당 중개사 id';
+comment on column elf_t_contract.land_lord_id is '임대인 id';
+comment on column elf_t_contract.real_estate_listing_id is '매물 id';
+comment on column elf_t_contract.contract_pdf_link is '계약서 PDF 파일 링크';
+comment on column elf_t_contract.contract_status is '계약서 상태값(계약 등록, 임대인 확인, 임대인에 의한 계약 취소, 입주자에 의한 계약 취소, 계약 합의';
+comment on column elf_t_contract.regist_dt is '계약 신청일자(해당 row 생성일자)';
+comment on column elf_t_contract.last_update_dt is '계약 최근 업데이트 일자';
+comment on column elf_t_contract.move_in_dt is '입주 일자';
