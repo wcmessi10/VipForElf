@@ -23,6 +23,7 @@ public class RealEstateListingEntity {
     @Column(name = "listing_id", nullable = false)
     private Long listingId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "occupancy_type")
     private OccupancyType occupancyType;
 
