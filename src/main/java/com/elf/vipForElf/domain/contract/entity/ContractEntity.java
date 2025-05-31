@@ -40,6 +40,9 @@ public class ContractEntity {
     @Column(name = "last_update_dt")
     private OffsetDateTime lastUpdateDt;
 
+    @Column(name = "move_in_dt")
+    private OffsetDateTime moveInDt;
+
     public enum ContractStatus{
         APPLY_FOR_CONTRACT,
         REVIEWED_BY_LANDLORD,
