@@ -1,5 +1,6 @@
 package com.elf.vipForElf.domain.realEstateAgency.entity;
 
+import com.elf.vipForElf.web.dto.NewRealEstateAgencyDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +29,10 @@ public class RealEstateAgencyEntity {
 
     @Column(name = "description")
     private String description;
+
+    public RealEstateAgencyEntity(NewRealEstateAgencyDTO newRealEstateAgencyDTO){
+        this.realEstateAgencyName = newRealEstateAgencyDTO.getRealEstateAgencyName();
+        this.contact = newRealEstateAgencyDTO.getContact();
+        this.description = newRealEstateAgencyDTO.getDescription();
+    }
 }
