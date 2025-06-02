@@ -60,7 +60,7 @@ public class RealEstateListingEntity {
         this.listingId = newRealEstateListingDTO.getListingId();
         this.listingType = newRealEstateListingDTO.getListingType();
         this.listingName = newRealEstateListingDTO.getListingName();
-        this.status = "New";
+        this.status = "Register";
         this.occupancyType = newRealEstateListingDTO.getOccupancyType();
         switch (newRealEstateListingDTO.getOccupancyType()){
             case OFFICE_SALE -> {
