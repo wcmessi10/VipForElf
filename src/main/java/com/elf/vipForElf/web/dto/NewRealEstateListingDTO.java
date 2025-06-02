@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public class NewRealEstateListingDTO {
     String listingType;
     Long listingId;
+    String listingName;
     RealEstateListingEntity.OccupancyType occupancyType;
     BigDecimal salePrice;
     BigDecimal deposit;

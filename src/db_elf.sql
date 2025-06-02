@@ -133,6 +133,7 @@ comment on column elf_t_real_estate_listing.monthly_rent is '월세 또는 공�
 comment on column elf_t_real_estate_listing.status is '매물 상태값(등록, 완료, 취소 등)';
 comment on column elf_t_real_estate_listing.real_estate_agency_id is '중개사 id';
 
+alter table elf_t_real_estate_listing add column listing_name VARCHAR(50);
 
 CREATE TABLE elf_t_contract (
     contract_id BIGSERIAL PRIMARY KEY,

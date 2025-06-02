@@ -24,6 +24,9 @@ public class RealEstateListingEntity {
     @Column(name = "listing_id", nullable = false)
     private Long listingId; // 매물의 id(건물 id or 공간 id)
 
+    @Column(name="listing_name",nullable = false)
+    private String listingName;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "occupancy_type")
     private OccupancyType occupancyType;
@@ -56,6 +59,7 @@ public class RealEstateListingEntity {
     public RealEstateListingEntity(NewRealEstateListingDTO newRealEstateListingDTO, RealEstateAgencyEntity realEstateAgency) throws IllegalAccessException {
         this.listingId = newRealEstateListingDTO.getListingId();
         this.listingType = newRealEstateListingDTO.getListingType();
+        this.listingName = newRealEstateListingDTO.getListingName();
         this.status = "New";
         this.occupancyType = newRealEstateListingDTO.getOccupancyType();
         switch (newRealEstateListingDTO.getOccupancyType()){

@@ -12,6 +12,7 @@ public class RegistedRealEstateListingDTO {
     Long id;
     String listingType;
     Long listingId;
+    String listingName;
     RealEstateListingEntity.OccupancyType occupancyType;
     BigDecimal salePrice;
     BigDecimal deposit;
@@ -22,6 +23,7 @@ public class RegistedRealEstateListingDTO {
         this.id = realEstateListingEntity.getId();
         this.listingId = realEstateListingEntity.getListingId();
         this.listingType = realEstateListingEntity.getListingType();
+        this.listingName = realEstateListingEntity.getListingName();
         this.occupancyType = realEstateListingEntity.getOccupancyType();
         this.salePrice = realEstateListingEntity.getSalePrice();
         this.deposit = realEstateListingEntity.getDeposit();
