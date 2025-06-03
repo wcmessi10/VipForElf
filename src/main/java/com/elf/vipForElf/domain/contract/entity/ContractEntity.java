@@ -1,5 +1,6 @@
 package com.elf.vipForElf.domain.contract.entity;
 
+import com.elf.vipForElf.domain.contract.vo.NewContract;
 import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity;
 import com.elf.vipForElf.domain.realEstateListing.entity.RealEstateListingEntity;
 import jakarta.persistence.*;
@@ -38,7 +39,7 @@ public class ContractEntity {
     private OffsetDateTime registDt = OffsetDateTime.now();
 
     @Column(name = "last_update_dt")
-    private OffsetDateTime lastUpdateDt;
+    private OffsetDateTime lastUpdateDt =OffsetDateTime.now();
 
     @Column(name = "move_in_dt")
     private OffsetDateTime moveInDt;
@@ -49,5 +50,17 @@ public class ContractEntity {
         REJECT_BY_LANDLORD,
         REJECT_BY_TENANT,
         SUBMIT_CONTRACT
+    }
+
+    public ContractEntity(NewContract newContract,
+                          RealEstateAgencyEntity realEstateAgencyEntity,
+                          RealEstateListingEntity realEstateListingEntity,
+                          String contractPdfLink){
+        this.contractStatus = ContractStatus.APPLY_FOR_CONTRACT;
+        this.realEstateAgencyEntity = realEstateAgencyEntity;
+        this.realEstateListingEntity = realEstateListingEntity;
+        this.moveInDt = newContract.getMoveInDt();
+        this.landLordId = newContract.getLandLordId();
+        this.contractPdfLink = contractPdfLink;
     }
 }
