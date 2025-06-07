@@ -1,12 +1,11 @@
 package com.elf.vipForElf.web.controller;
 
 import com.elf.vipForElf.domain.contract.service.ContractService;
-import com.elf.vipForElf.web.dto.ContractIdDTO;
-import com.elf.vipForElf.web.dto.NewContractDTO;
-import com.elf.vipForElf.web.dto.RegisterContractDTO;
-import com.elf.vipForElf.web.dto.ResponseDTO;
+import com.elf.vipForElf.web.dto.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/contract")
@@ -41,5 +40,10 @@ public class ContactController {
     @PostMapping("/submitContract")
     public ResponseDTO<String> submitContract(@RequestBody ContractIdDTO contractIdDTO){
         return new ResponseDTO<>(contractService.submitContract(contractIdDTO));
+    }
+
+    @GetMapping("/getContractListByLandLordId")
+    public ResponseDTO<List<ContractRow>> getContractListByLandLordId(@RequestParam String landLordId){
+        return new ResponseDTO<>(contractService.getContractListByLandLordId(landLordId));
     }
 }

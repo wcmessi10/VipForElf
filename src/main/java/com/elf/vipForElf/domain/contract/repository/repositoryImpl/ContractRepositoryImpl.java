@@ -7,8 +7,11 @@ import com.elf.vipForElf.domain.contract.vo.ChangeContractVO;
 import com.elf.vipForElf.domain.contract.vo.NewContract;
 import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity;
 import com.elf.vipForElf.domain.realEstateListing.entity.RealEstateListingEntity;
+import com.elf.vipForElf.web.dto.ContractRow;
 import com.elf.vipForElf.web.dto.RegisterContractDTO;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ContractRepositoryImpl implements ContractRepository {
@@ -59,5 +62,21 @@ public class ContractRepositoryImpl implements ContractRepository {
                 break;
         }
         return contractJPARepository.save(contractEntity).getContractStatus().name();
+    }
+
+    @Override
+    public List<ContractRow> getContractListByLandLordId(String landLordId) {
+        return contractJPARepository.findByLandLordId(landLordId).stream()
+                .map(contractEntity ->{
+                    String listingName = contractEntity.getRealEstateListingEntity() != null
+                            ? contractEntity.getRealEstateListingEntity().getListingName()
+                            : null;
+                    return new ContractRow(
+                            contractEntity.getContractId(),
+                            listingName,
+                            contractEntity.getContractStatus().name()
+                    );
+                })
+                .toList();
     }
 }

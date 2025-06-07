@@ -5,10 +5,13 @@ import com.elf.vipForElf.domain.contract.service.ContractService;
 import com.elf.vipForElf.domain.contract.vo.ChangeContractVO;
 import com.elf.vipForElf.domain.contract.vo.NewContract;
 import com.elf.vipForElf.web.dto.ContractIdDTO;
+import com.elf.vipForElf.web.dto.ContractRow;
 import com.elf.vipForElf.web.dto.NewContractDTO;
 import com.elf.vipForElf.web.dto.RegisterContractDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 public class ContractServiceImpl implements ContractService {
@@ -52,5 +55,10 @@ public class ContractServiceImpl implements ContractService {
     public String submitContract(ContractIdDTO contractIdDTO) {
         ChangeContractVO changeContractVO = new ChangeContractVO(contractIdDTO.getContractId(),"Submit");
         return contractRepository.changeStatusByContractId(changeContractVO);
+    }
+
+    @Override
+    public List<ContractRow> getContractListByLandLordId(String landLordId) {
+        return contractRepository.getContractListByLandLordId(landLordId);
     }
 }
