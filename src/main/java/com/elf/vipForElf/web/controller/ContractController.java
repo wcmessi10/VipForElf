@@ -9,10 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contract")
-public class ContactController {
+public class ContractController {
     private final ContractService contractService;
 
-    public ContactController(ContractService contractService) {
+    public ContractController(ContractService contractService) {
         this.contractService = contractService;
     }
 

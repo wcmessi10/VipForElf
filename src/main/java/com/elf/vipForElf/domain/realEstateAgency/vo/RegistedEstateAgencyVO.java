@@ -1,16 +1,20 @@
 package com.elf.vipForElf.domain.realEstateAgency.vo;
 
 import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity;
+import lombok.Getter;
 
 import java.time.OffsetDateTime;
 
+@Getter
 public class RegistedEstateAgencyVO {
+    Long id;
     String realEstateAgencyName;
     OffsetDateTime registDt;
     String contact;
     String description;
 
     public RegistedEstateAgencyVO(RealEstateAgencyEntity save) {
+        this.id = save.getId();
         this.realEstateAgencyName=save.getRealEstateAgencyName();
         this.registDt =save.getRegistDt();
         this.contact = save.getContact();
