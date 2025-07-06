@@ -1,20 +1,15 @@
-package com.elf.vipForElf.web.dto;
+package com.elf.vipForElf.web.dto
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.time.Instant
 
-import java.time.Instant;
-
-@Getter
-@NoArgsConstructor
-public class ResponseDTO<T> {
-    public Boolean result;
-    public Long timestamp;
-    public T body;
-
-    public ResponseDTO(T body){
-        this.result = true;
-        this.body = body;
-        this.timestamp = Instant.now().toEpochMilli();
-    }
+data class ResponseDTO<T>(
+    var result: Boolean = true,
+    var timestamp: Long = Instant.now().toEpochMilli(),
+    var body: T? = null
+){
+    constructor(body: T) : this(
+        result = true,
+        timestamp = Instant.now().toEpochMilli(),
+        body = body
+    )
 }

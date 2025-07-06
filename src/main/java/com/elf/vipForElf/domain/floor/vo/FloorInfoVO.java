@@ -11,7 +11,7 @@ public class FloorInfoVO {
     Integer floorNumber;
     String purpose;
     BuildingEntity buildingEntity;
-    public FloorInfoVO(NewFloorDTO newFloorDTO,BuildingEntity buildingEntity){
+    public FloorInfoVO(NewFloorDTO newFloorDTO, BuildingEntity buildingEntity){
         this.id=null;
         this.floorNumber = newFloorDTO.getFloorNumber();
         this.purpose = newFloorDTO.getPurpose();

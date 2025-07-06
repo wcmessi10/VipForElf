@@ -1,14 +1,7 @@
-package com.elf.vipForElf.web.dto;
+package com.elf.vipForElf.web.dto
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class NewFloorDTO {
-    Integer floorNumber;
-    String purpose;
-    Long buildingId;
-}
+data class NewFloorDTO(
+    val floorNumber: Int?,
+    val purpose: String?,
+    val buildingId: Long?
+)

@@ -1,21 +1,18 @@
-package com.elf.vipForElf.domain.contract.vo;
+package com.elf.vipForElf.domain.contract.vo
 
-import com.elf.vipForElf.web.dto.NewContractDTO;
-import lombok.Data;
+import com.elf.vipForElf.web.dto.NewContractDTO
+import java.time.OffsetDateTime
 
-import java.time.OffsetDateTime;
-
-@Data
-public class NewContract {
-    Long realEstateListingId;
-    Long realEstateAgencyId;
-    String landLordId;
-    OffsetDateTime moveInDt;
-
-    public NewContract(NewContractDTO newContractDTO){
-        this.realEstateAgencyId = newContractDTO.getRealEstateAgencyId();
-        this.realEstateListingId = newContractDTO.getRealEstateListingId();
-        this.moveInDt = newContractDTO.getMoveInDt();
-        this.landLordId = newContractDTO.getLandLordId();
-    }
+data class NewContract(
+    val realEstateListingId: Long?,
+    val realEstateAgencyId: Long?,
+    val landLordId: String?,
+    val moveInDt: OffsetDateTime?
+) {
+    constructor(newContractDTO: NewContractDTO) : this(
+        realEstateListingId = newContractDTO.realEstateListingId,
+        realEstateAgencyId = newContractDTO.realEstateAgencyId,
+        landLordId = newContractDTO.landLordId,
+        moveInDt = newContractDTO.moveInDt
+    )
 }

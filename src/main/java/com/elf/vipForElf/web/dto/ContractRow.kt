@@ -1,12 +1,7 @@
-package com.elf.vipForElf.web.dto;
+package com.elf.vipForElf.domain.contract.vo
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
-public class ContractRow {
-    Long contractId;
-    String listingName;
-    String contractStatus;
-}
+data class ContractRow(
+    val contractId: Long,
+    val listingName: String,
+    val contractStatus: String
+)

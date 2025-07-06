@@ -4,10 +4,10 @@ import com.elf.vipForElf.domain.contract.entity.ContractEntity;
 import com.elf.vipForElf.domain.contract.repository.ContractRepository;
 import com.elf.vipForElf.domain.contract.repository.JPA.ContractJPARepository;
 import com.elf.vipForElf.domain.contract.vo.ChangeContractVO;
+import com.elf.vipForElf.domain.contract.vo.ContractRow;
 import com.elf.vipForElf.domain.contract.vo.NewContract;
 import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity;
 import com.elf.vipForElf.domain.realEstateListing.entity.RealEstateListingEntity;
-import com.elf.vipForElf.web.dto.ContractRow;
 import com.elf.vipForElf.web.dto.RegisterContractDTO;
 import org.springframework.stereotype.Repository;
 
@@ -32,7 +32,7 @@ public class ContractRepositoryImpl implements ContractRepository {
     }
 
     @Override
-    public RegisterContractDTO registerContract(NewContract newContract,String pdfFileLink) {
+    public RegisterContractDTO registerContract(NewContract newContract, String pdfFileLink) {
         RealEstateListingEntity realEstateListingEntity = new RealEstateListingEntity();
         realEstateListingEntity.setId(newContract.getRealEstateListingId());
         RealEstateAgencyEntity realEstateAgencyEntity = new RealEstateAgencyEntity();

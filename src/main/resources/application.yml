@@ -33,3 +33,21 @@ springdoc:
 
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    tags:
+      application: app # add tag to each prometheus metric
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: 'true'
+      minimum-expected-value: # Publish fewer histogram buckets by clamping the range of expected values.
+        http.server.requests: 5ms
+      maximum-expected-value:
+        http.server.requests: 1000ms

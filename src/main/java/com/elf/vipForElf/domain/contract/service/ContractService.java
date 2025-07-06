@@ -1,7 +1,7 @@
 package com.elf.vipForElf.domain.contract.service;
 
+import com.elf.vipForElf.domain.contract.vo.ContractRow;
 import com.elf.vipForElf.web.dto.ContractIdDTO;
-import com.elf.vipForElf.web.dto.ContractRow;
 import com.elf.vipForElf.web.dto.NewContractDTO;
 import com.elf.vipForElf.web.dto.RegisterContractDTO;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,17 +1,10 @@
-package com.elf.vipForElf.web.dto;
+package com.elf.vipForElf.web.dto
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.time.OffsetDateTime
 
-import java.time.OffsetDateTime;
-
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class NewContractDTO {
-    Long realEstateListingId;
-    Long realEstateAgencyId;
-    String landLordId;
-    OffsetDateTime moveInDt;
-}
+data class NewContractDTO(
+    val realEstateListingId: Long?,
+    val realEstateAgencyId: Long?,
+    val landLordId: String?,
+    val moveInDt: OffsetDateTime?
+)

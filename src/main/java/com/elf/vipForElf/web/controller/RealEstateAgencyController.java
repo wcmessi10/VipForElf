@@ -7,11 +7,9 @@ import com.elf.vipForElf.web.dto.NewRealEstateAgencyDTO;
 import com.elf.vipForElf.web.dto.RealEstateAgencyDetailDTO;
 import com.elf.vipForElf.web.dto.RealEstateAgencyListDTO;
 import com.elf.vipForElf.web.dto.ResponseDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

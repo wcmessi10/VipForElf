@@ -16,19 +16,19 @@ import java.time.OffsetDateTime;
 public class RealEstateAgencyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @Column(name = "real_estate_agency_name", nullable = false)
-    private String realEstateAgencyName;
+    public String realEstateAgencyName;
 
     @Column(name = "regist_dt")
-    private OffsetDateTime registDt;
+    public OffsetDateTime registDt;
 
     @Column(name = "contact", nullable = false)
-    private String contact;
+    public String contact;
 
     @Column(name = "description")
-    private String description;
+    public String description;
 
     public RealEstateAgencyEntity(NewRealEstateAgencyDTO newRealEstateAgencyDTO){
         this.realEstateAgencyName = newRealEstateAgencyDTO.getRealEstateAgencyName();

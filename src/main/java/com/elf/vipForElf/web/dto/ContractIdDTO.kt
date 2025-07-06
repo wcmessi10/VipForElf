@@ -1,10 +1,5 @@
-package com.elf.vipForElf.web.dto;
+package com.elf.vipForElf.web.dto
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
-public class ContractIdDTO {
-    Long contractId;
-}
+data class ContractIdDTO(
+    val contractId: Long?
+)
