@@ -1,8 +1,8 @@
 package com.elf.vipForElf.web.controller;
 
 import com.elf.vipForElf.domain.realEstateListing.service.RealEstateListingService;
-import com.elf.vipForElf.domain.realEstateListing.vo.RealEstateListingListDTO;
 import com.elf.vipForElf.web.dto.NewRealEstateListingDTO;
+import com.elf.vipForElf.web.dto.RealEstateListingListDTO;
 import com.elf.vipForElf.web.dto.RegistedRealEstateListingDTO;
 import com.elf.vipForElf.web.dto.ResponseDTO;
 import org.springframework.web.bind.annotation.*;

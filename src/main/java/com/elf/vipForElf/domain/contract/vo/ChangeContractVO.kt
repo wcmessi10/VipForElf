@@ -1,11 +1,6 @@
-package com.elf.vipForElf.domain.contract.vo;
+package com.elf.vipForElf.domain.contract.vo
 
-import lombok.AllArgsConstructor;
-import lombok.Value;
-
-@Value
-@AllArgsConstructor
-public class ChangeContractVO {
-    Long contractId;
-    String status;
-}
+data class ChangeContractVO(
+    val contractId: Long,
+    val status: String
+)

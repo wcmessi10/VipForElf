@@ -1,15 +1,13 @@
-package com.elf.vipForElf.domain.realEstateAgency.vo;
+package com.elf.vipForElf.domain.realEstateAgency.vo
 
-import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity;
-import lombok.Data;
+import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity
 
-@Data
-public class RealEstateAgencyRow {
-    Long id;
-    String realEstateAgencyName;
-
-    public RealEstateAgencyRow(RealEstateAgencyEntity realEstateAgencyEntity){
-        this.id = realEstateAgencyEntity.getId();
-        this.realEstateAgencyName = realEstateAgencyEntity.getRealEstateAgencyName();
-    }
+data class RealEstateAgencyRow(
+    val id: Long,
+    val realEstateAgencyName: String
+) {
+    constructor(realEstateAgencyEntity: RealEstateAgencyEntity) : this(
+        id = realEstateAgencyEntity.id,
+        realEstateAgencyName = realEstateAgencyEntity.realEstateAgencyName
+    )
 }

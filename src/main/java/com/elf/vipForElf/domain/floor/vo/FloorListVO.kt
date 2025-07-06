@@ -1,15 +1,13 @@
-package com.elf.vipForElf.domain.floor.vo;
+package com.elf.vipForElf.domain.floor.vo
 
-import com.elf.vipForElf.domain.floor.entity.FloorEntity;
-import lombok.Value;
+import com.elf.vipForElf.domain.floor.entity.FloorEntity
 
-@Value
-public class FloorListVO {
-    Long id;
-    Integer floorNumber;
-
-    public FloorListVO(FloorEntity floorEntity){
-        this.id = floorEntity.getId();
-        this.floorNumber = floorEntity.getFloorNumber();
-    }
+data class FloorListVO(
+    val id: Long,
+    val floorNumber: Int
+) {
+    constructor(floorEntity: FloorEntity) : this(
+        id = floorEntity.id,
+        floorNumber = floorEntity.floorNumber
+    )
 }

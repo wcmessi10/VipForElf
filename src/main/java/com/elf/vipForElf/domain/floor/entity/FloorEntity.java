@@ -15,17 +15,17 @@ import lombok.Setter;
 public class FloorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @Column(name = "floor_number", nullable = false)
-    private Integer floorNumber;
+    public Integer floorNumber;
 
     @Column(name = "purpose", length = 255)
-    private String purpose = "Mixed-use";
+    public String purpose = "Mixed-use";
 
     @ManyToOne
     @JoinColumn(name = "building_id", nullable = false)
-    private BuildingEntity building;
+    public BuildingEntity building;
 
     public FloorEntity floorEntity(FloorInfoVO floorInfoVO){
         FloorEntity floorEntity = new FloorEntity();

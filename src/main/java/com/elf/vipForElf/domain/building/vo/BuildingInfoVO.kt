@@ -1,36 +1,33 @@
-package com.elf.vipForElf.domain.building.vo;
+package com.elf.vipForElf.domain.building.vo
 
-import com.elf.vipForElf.domain.building.entity.BuildingEntity;
-import com.elf.vipForElf.web.dto.NewBuildingDTO;
-import lombok.Value;
+import com.elf.vipForElf.domain.building.entity.BuildingEntity
+import com.elf.vipForElf.web.dto.NewBuildingDTO
 
-@Value
-public class BuildingInfoVO {
-    Long id;
-    String buildingName;
-    String address;
-    String buildingNumber;
-    String businessNumber;
-    String zipcode;
-
-    public BuildingInfoVO(NewBuildingDTO newBuildingDTO){
-        if(newBuildingDTO.getZipcode().length() !=5){
-            throw new IllegalArgumentException("ZipCode is wrong");
-        }
-        this.id = null;
-        this.buildingName = newBuildingDTO.getBuildingName();
-        this.buildingNumber = newBuildingDTO.getBuildingNumber();
-        this.address = newBuildingDTO.getAddress();
-        this.zipcode = newBuildingDTO.getZipcode();
-        this.businessNumber = newBuildingDTO.getBusinessNumber();
+data class BuildingInfoVO(
+    val id: Long? = null,
+    val buildingName: String,
+    val address: String,
+    val buildingNumber: String,
+    val businessNumber: String,
+    val zipcode: String
+) {
+    constructor(newBuildingDTO: NewBuildingDTO) : this(
+        id = null,
+        buildingName = newBuildingDTO.buildingName ?: "",
+        address = newBuildingDTO.address ?: "",
+        buildingNumber = newBuildingDTO.buildingNumber ?: "",
+        businessNumber = newBuildingDTO.businessNumber ?: "",
+        zipcode = newBuildingDTO.zipcode ?: ""
+    ) {
+        require(zipcode.length == 5) { "ZipCode is wrong" }
     }
 
-    public BuildingInfoVO(BuildingEntity buildingEntity){
-        this.id = buildingEntity.getId();
-        this.buildingName = buildingEntity.getBuildingName();
-        this.address = buildingEntity.getAddress();
-        this.buildingNumber = buildingEntity.getBuildingNumber();
-        this.zipcode = buildingEntity.getZipcode();
-        this.businessNumber = buildingEntity.getBusinessNumber();
-    }
+    constructor(buildingEntity: BuildingEntity) : this(
+        id = buildingEntity.id,
+        buildingName = buildingEntity.buildingName,
+        address = buildingEntity.address,
+        buildingNumber = buildingEntity.buildingNumber,
+        businessNumber = buildingEntity.businessNumber,
+        zipcode = buildingEntity.zipcode
+    )
 }

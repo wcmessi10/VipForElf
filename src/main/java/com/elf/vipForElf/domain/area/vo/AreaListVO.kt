@@ -1,17 +1,15 @@
-package com.elf.vipForElf.domain.area.vo;
+package com.elf.vipForElf.domain.area.vo
 
-import com.elf.vipForElf.domain.area.entity.AreaEntity;
-import lombok.Value;
+import com.elf.vipForElf.domain.area.entity.AreaEntity
 
-@Value
-public class AreaListVO {
-    Long id;
-    String officeName;
-    String roomNumber;
-
-    public AreaListVO(AreaEntity areaEntity){
-        this.id= areaEntity.getId();
-        this.officeName = areaEntity.getOfficeName();
-        this.roomNumber = areaEntity.getRoomNumber();
-    }
+data class AreaListVO(
+    val id: Long,
+    val officeName: String,
+    val roomNumber: String
+) {
+    constructor(areaEntity: AreaEntity) : this(
+        id = areaEntity.id,
+        officeName = areaEntity.officeName,
+        roomNumber = areaEntity.roomNumber
+    )
 }

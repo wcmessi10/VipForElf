@@ -1,21 +1,17 @@
-package com.elf.vipForElf.domain.realEstateListing.vo;
+package com.elf.vipForElf.domain.realEstateListing.vo
 
-import com.elf.vipForElf.domain.realEstateListing.entity.RealEstateListingEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.elf.vipForElf.domain.realEstateListing.entity.RealEstateListingEntity
 
-@Getter
-@NoArgsConstructor
-public class RealEstateListingRow {
-    Long id;
-    String listingType;
-    String listingName;
-    RealEstateListingEntity.OccupancyType occupancyType;
-
-    public RealEstateListingRow(RealEstateListingEntity realEstateListingEntity){
-        this.id = realEstateListingEntity.getId();
-        this.listingType = realEstateListingEntity.getListingType();
-        this.listingName = realEstateListingEntity.getListingName();
-        this.occupancyType = realEstateListingEntity.getOccupancyType();
-    }
+data class RealEstateListingRow(
+    var id: Long? = null,
+    var listingType: String? = null,
+    var listingName: String? = null,
+    var occupancyType: RealEstateListingEntity.OccupancyType? = null
+) {
+    constructor(realEstateListingEntity: RealEstateListingEntity) : this(
+        id = realEstateListingEntity.id,
+        listingType = realEstateListingEntity.listingType,
+        listingName = realEstateListingEntity.listingName,
+        occupancyType = realEstateListingEntity.occupancyType
+    )
 }

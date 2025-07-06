@@ -1,11 +1,11 @@
 package com.elf.vipForElf.domain.floor.service.serviceImpl;
 
 import com.elf.vipForElf.domain.building.entity.BuildingEntity;
+import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
 import com.elf.vipForElf.domain.floor.entity.FloorEntity;
 import com.elf.vipForElf.domain.floor.repository.FloorRepository;
 import com.elf.vipForElf.domain.building.service.BuildingService;
 import com.elf.vipForElf.domain.floor.service.FloorService;
-import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
 import com.elf.vipForElf.domain.floor.vo.FloorInfoVO;
 import com.elf.vipForElf.domain.floor.vo.FloorListVO;
 import com.elf.vipForElf.web.dto.NewFloorDTO;

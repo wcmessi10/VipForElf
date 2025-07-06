@@ -10,6 +10,6 @@ import java.util.List;
 public interface RealEstateListingRepository {
     RegistedRealEstateListingDTO registRealEstateListing(NewRealEstateListingDTO newRealEstateListingDTO, RealEstateAgencyEntity realEstateAgencyEntity) throws IllegalAccessException;
     Long getTotalCount();
-    List<RealEstateListingRow> getRealEstateListingList(Integer page, Integer size,String searchCondition);
+    List<RealEstateListingRow> getRealEstateListingList(Integer page, Integer size, String searchCondition);
     RegistedRealEstateListingDTO getById(Long id);
 }

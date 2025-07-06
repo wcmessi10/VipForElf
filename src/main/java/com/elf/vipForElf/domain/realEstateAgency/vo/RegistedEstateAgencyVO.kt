@@ -1,23 +1,20 @@
-package com.elf.vipForElf.domain.realEstateAgency.vo;
+package com.elf.vipForElf.domain.realEstateAgency.vo
 
-import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity;
-import lombok.Getter;
+import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity
+import java.time.OffsetDateTime
 
-import java.time.OffsetDateTime;
-
-@Getter
-public class RegistedEstateAgencyVO {
-    Long id;
-    String realEstateAgencyName;
-    OffsetDateTime registDt;
-    String contact;
-    String description;
-
-    public RegistedEstateAgencyVO(RealEstateAgencyEntity save) {
-        this.id = save.getId();
-        this.realEstateAgencyName=save.getRealEstateAgencyName();
-        this.registDt =save.getRegistDt();
-        this.contact = save.getContact();
-        this.description = save.getDescription();
-    }
+data class RegistedEstateAgencyVO(
+    val id: Long,
+    val realEstateAgencyName: String,
+    val registDt: OffsetDateTime?,
+    val contact: String,
+    val description: String?
+) {
+    constructor(save: RealEstateAgencyEntity) : this(
+        id = save.id,
+        realEstateAgencyName = save.realEstateAgencyName,
+        registDt = save.registDt,
+        contact = save.contact,
+        description = save.description
+    )
 }

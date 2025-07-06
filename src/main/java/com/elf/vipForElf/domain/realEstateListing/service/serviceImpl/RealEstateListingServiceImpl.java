@@ -4,9 +4,9 @@ import com.elf.vipForElf.domain.realEstateAgency.entity.RealEstateAgencyEntity;
 import com.elf.vipForElf.domain.realEstateAgency.repository.RealEstateAgencyRepository;
 import com.elf.vipForElf.domain.realEstateListing.repository.RealEstateListingRepository;
 import com.elf.vipForElf.domain.realEstateListing.service.RealEstateListingService;
-import com.elf.vipForElf.domain.realEstateListing.vo.RealEstateListingListDTO;
 import com.elf.vipForElf.domain.realEstateListing.vo.RealEstateListingRow;
 import com.elf.vipForElf.web.dto.NewRealEstateListingDTO;
+import com.elf.vipForElf.web.dto.RealEstateListingListDTO;
 import com.elf.vipForElf.web.dto.RegistedRealEstateListingDTO;
 import org.springframework.stereotype.Service;
 

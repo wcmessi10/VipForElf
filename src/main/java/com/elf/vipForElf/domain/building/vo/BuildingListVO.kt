@@ -1,15 +1,13 @@
-package com.elf.vipForElf.domain.building.vo;
+package com.elf.vipForElf.domain.building.vo
 
-import com.elf.vipForElf.domain.building.entity.BuildingEntity;
-import lombok.Value;
+import com.elf.vipForElf.domain.building.entity.BuildingEntity
 
-@Value
-public class BuildingListVO {
-    String buildingName;
-    String buildingNumber;
-
-    public BuildingListVO(BuildingEntity buildingEntity){
-        this.buildingName = buildingEntity.getBuildingName();
-        this.buildingNumber = buildingEntity.getBuildingNumber();
-    }
+data class BuildingListVO(
+    val buildingName: String,
+    val buildingNumber: String
+) {
+    constructor(buildingEntity: BuildingEntity) : this(
+        buildingName = buildingEntity.buildingName,
+        buildingNumber = buildingEntity.buildingNumber
+    )
 }

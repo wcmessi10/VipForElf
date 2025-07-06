@@ -1,7 +1,7 @@
 package com.elf.vipForElf.domain.realEstateListing.service;
 
-import com.elf.vipForElf.domain.realEstateListing.vo.RealEstateListingListDTO;
 import com.elf.vipForElf.web.dto.NewRealEstateListingDTO;
+import com.elf.vipForElf.web.dto.RealEstateListingListDTO;
 import com.elf.vipForElf.web.dto.RegistedRealEstateListingDTO;
 
 public interface RealEstateListingService {

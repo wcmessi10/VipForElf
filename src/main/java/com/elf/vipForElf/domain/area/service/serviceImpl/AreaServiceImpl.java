@@ -1,11 +1,11 @@
 package com.elf.vipForElf.domain.area.service.serviceImpl;
 
+import com.elf.vipForElf.domain.area.vo.AreaInfoVO;
+import com.elf.vipForElf.domain.area.vo.AreaListVO;
 import com.elf.vipForElf.domain.floor.entity.FloorEntity;
 import com.elf.vipForElf.domain.area.repository.AreaRepository;
 import com.elf.vipForElf.domain.area.service.AreaService;
 import com.elf.vipForElf.domain.floor.service.FloorService;
-import com.elf.vipForElf.domain.area.vo.AreaInfoVO;
-import com.elf.vipForElf.domain.area.vo.AreaListVO;
 import com.elf.vipForElf.web.dto.MoveInAreaDTO;
 import com.elf.vipForElf.web.dto.NewAreaDTO;
 import org.springframework.data.domain.PageRequest;
