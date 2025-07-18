@@ -1,35 +1,48 @@
-package com.elf.vipForElf.web.controller;
+package com.elf.vipForElf.web.controller
 
-import com.elf.vipForElf.domain.realEstateListing.service.RealEstateListingService;
-import com.elf.vipForElf.web.dto.NewRealEstateListingDTO;
-import com.elf.vipForElf.web.dto.RealEstateListingListDTO;
-import com.elf.vipForElf.web.dto.RegistedRealEstateListingDTO;
-import com.elf.vipForElf.web.dto.ResponseDTO;
-import org.springframework.web.bind.annotation.*;
+import com.elf.vipForElf.domain.realEstateListing.service.RealEstateListingService
+import com.elf.vipForElf.web.dto.NewRealEstateListingDTO
+import com.elf.vipForElf.web.dto.RealEstateListingListDTO
+import com.elf.vipForElf.web.dto.RegistedRealEstateListingDTO
+import com.elf.vipForElf.web.dto.ResponseDTO
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/realEstateListing")
-public class RealEstateListingController {
-    private final RealEstateListingService realEstateListingService;
-
-    public RealEstateListingController(RealEstateListingService realEstateListingService) {
-        this.realEstateListingService = realEstateListingService;
-    }
+class RealEstateListingController(
+    private val realEstateListingService: RealEstateListingService
+) {
 
     @PostMapping("/registRealEstateListing")
-    public ResponseDTO<RegistedRealEstateListingDTO> registRealEstateListing(@RequestBody NewRealEstateListingDTO newRealEstateListingDTO) throws IllegalAccessException {
-        return new ResponseDTO<>(realEstateListingService.registRealEstateListing(newRealEstateListingDTO));
+    fun registRealEstateListing(
+        @RequestBody newRealEstateListingDTO: NewRealEstateListingDTO
+    ): ResponseDTO<RegistedRealEstateListingDTO> {
+        return ResponseDTO(
+            realEstateListingService.registRealEstateListing(newRealEstateListingDTO)
+        )
     }
 
     @GetMapping("/getRealEstateListingList")
-    public ResponseDTO<RealEstateListingListDTO> getRealEstateListingList(@RequestParam(defaultValue = "page") Integer page,
-                                                                          @RequestParam(defaultValue = "10") Integer size,
-                                                                          @RequestParam String searchCondition){
-        return new ResponseDTO<>(realEstateListingService.getRealEstateListingList(page,size,searchCondition));
+    fun getRealEstateListingList(
+        @RequestParam(defaultValue = "page") page: Int,
+        @RequestParam(defaultValue = "10") size: Int,
+        @RequestParam searchCondition: String
+    ): ResponseDTO<RealEstateListingListDTO> {
+        return ResponseDTO(
+            realEstateListingService.getRealEstateListingList(
+                page,
+                size,
+                searchCondition
+            )
+        )
     }
 
     @GetMapping("/getRealEstateListingDetail/{id}")
-    public ResponseDTO<?> getRealEstateListingDetail(@PathVariable Long id){
-        return new ResponseDTO<>(realEstateListingService.getRealEstateListingDetail(id));
+    fun getRealEstateListingDetail(
+        @PathVariable id: Long
+    ): ResponseDTO<Any> {
+        return ResponseDTO(
+            realEstateListingService.getRealEstateListingDetail(id)
+        )
     }
 }

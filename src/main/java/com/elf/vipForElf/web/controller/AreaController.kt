@@ -1,54 +1,53 @@
-package com.elf.vipForElf.web.controller;
+package com.elf.vipForElf.web.controller
 
-import com.elf.vipForElf.domain.area.service.AreaService;
-import com.elf.vipForElf.domain.area.vo.AreaInfoVO;
-import com.elf.vipForElf.domain.area.vo.AreaListVO;
-import com.elf.vipForElf.web.dto.MoveInAreaDTO;
-import com.elf.vipForElf.web.dto.NewAreaDTO;
-import com.elf.vipForElf.web.dto.ResponseDTO;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.elf.vipForElf.domain.area.service.AreaService
+import com.elf.vipForElf.domain.area.vo.AreaInfoVO
+import com.elf.vipForElf.domain.area.vo.AreaListVO
+import com.elf.vipForElf.web.dto.MoveInAreaDTO
+import com.elf.vipForElf.web.dto.NewAreaDTO
+import com.elf.vipForElf.web.dto.ResponseDTO
+import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "칸", description = "층의 칸 관련 API")
 @RestController
 @RequestMapping("/area")
-public class AreaController {
-    private final AreaService areaService;
-
-    public AreaController(AreaService areaService) {
-        this.areaService = areaService;
-    }
+class AreaController(
+    private val areaService: AreaService
+) {
 
     @PostMapping("/createArea")
-    public ResponseDTO<AreaInfoVO> createArea(@ModelAttribute NewAreaDTO newAreaDTO){
-        return new ResponseDTO<>(areaService.createArea(newAreaDTO));
+    fun createArea(@ModelAttribute newAreaDTO: NewAreaDTO): ResponseDTO<AreaInfoVO> {
+        return ResponseDTO(areaService.createArea(newAreaDTO))
     }
 
     @PostMapping("/moveIn")
-    public ResponseDTO<AreaInfoVO> moveIn(@ModelAttribute MoveInAreaDTO moveInAreaDTO){
-        return new ResponseDTO<>(areaService.moveIn(moveInAreaDTO));
+    fun moveIn(@ModelAttribute moveInAreaDTO: MoveInAreaDTO): ResponseDTO<AreaInfoVO> {
+        return ResponseDTO(areaService.moveIn(moveInAreaDTO))
     }
 
     @GetMapping("/getById")
-    public ResponseDTO<AreaInfoVO> findById(@RequestParam Long id){
-        return new ResponseDTO<>(areaService.findAreaById(id));
+    fun findById(@RequestParam id: Long): ResponseDTO<AreaInfoVO> {
+        return ResponseDTO(areaService.findAreaById(id))
     }
 
     @GetMapping("/getAreaList")
-    public ResponseDTO<List<AreaListVO>> getAreaList(@RequestParam(required = false) String searchCondition, @RequestParam int page, @RequestParam int size){
-        if(searchCondition==null) searchCondition="";
-        return new ResponseDTO<>(areaService.getAreaList(searchCondition,page,size));
+    fun getAreaList(
+        @RequestParam(required = false) searchCondition: String?,
+        @RequestParam page: Int,
+        @RequestParam size: Int
+    ): ResponseDTO<List<AreaListVO>> {
+        val condition = searchCondition ?: ""
+        return ResponseDTO(areaService.getAreaList(condition, page, size))
     }
 
-    @GetMapping(value = "/getAreaListByFloor")
-    public ResponseDTO<List<AreaListVO>> getAreaListByFloor(@RequestParam Long floorId){
-        return new ResponseDTO<>(areaService.getAreaListByFloor(floorId));
+    @GetMapping("/getAreaListByFloor")
+    fun getAreaListByFloor(@RequestParam floorId: Long): ResponseDTO<List<AreaListVO>> {
+        return ResponseDTO(areaService.getAreaListByFloor(floorId))
     }
 
-    @DeleteMapping(value = "/deleteById")
-    public ResponseDTO<String> deleteById(@RequestParam Long id){
-        return  new ResponseDTO<>(areaService.deleteById(id));
+    @DeleteMapping("/deleteById")
+    fun deleteById(@RequestParam id: Long): ResponseDTO<String> {
+        return ResponseDTO(areaService.deleteById(id))
     }
 }

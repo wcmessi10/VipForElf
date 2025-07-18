@@ -1,50 +1,69 @@
-package com.elf.vipForElf.web.controller;
+package com.elf.vipForElf.web.controller
 
-import com.elf.vipForElf.domain.contract.service.ContractService;
-import com.elf.vipForElf.domain.contract.vo.ContractRow;
-import com.elf.vipForElf.web.dto.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
+import com.elf.vipForElf.domain.contract.service.ContractService
+import com.elf.vipForElf.domain.contract.vo.ContractRow
+import com.elf.vipForElf.web.dto.*
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/contract")
-public class ContractController {
-    private final ContractService contractService;
-
-    public ContractController(ContractService contractService) {
-        this.contractService = contractService;
-    }
+class ContractController(
+    private val contractService: ContractService
+) {
 
     @PostMapping("/newContract")
-    public ResponseDTO<RegisterContractDTO> newContract(@RequestPart(name = "body") NewContractDTO newContractDTO,
-                                                        @RequestPart(name = "file") MultipartFile contractFile) throws IllegalAccessException {
-        return new ResponseDTO<>(contractService.newContract(newContractDTO,contractFile));
+    fun newContract(
+        @RequestPart(name = "body") newContractDTO: NewContractDTO,
+        @RequestPart(name = "file") contractFile: MultipartFile
+    ): ResponseDTO<RegisterContractDTO> {
+        return ResponseDTO(
+            contractService.newContract(newContractDTO, contractFile)
+        )
     }
 
     @PostMapping("/checkContract")
-    public ResponseDTO<String> checkContract(@RequestBody ContractIdDTO contractIdDTO){
-        return new ResponseDTO<>(contractService.checkContract(contractIdDTO));
+    fun checkContract(
+        @RequestBody contractIdDTO: ContractIdDTO
+    ): ResponseDTO<String> {
+        return ResponseDTO(
+            contractService.checkContract(contractIdDTO)
+        )
     }
 
     @PostMapping("/rejectContractByLandLord")
-    public ResponseDTO<String> rejectContractByLandLord(@RequestBody ContractIdDTO contractIdDTO){
-        return new ResponseDTO<>(contractService.rejectContractByLandLord(contractIdDTO));
+    fun rejectContractByLandLord(
+        @RequestBody contractIdDTO: ContractIdDTO
+    ): ResponseDTO<String> {
+        return ResponseDTO(
+            contractService.rejectContractByLandLord(contractIdDTO)
+        )
     }
 
     @PostMapping("/rejectContractByTenant")
-    public ResponseDTO<String> rejectContractByTenant(@RequestBody ContractIdDTO contractIdDTO){
-        return new ResponseDTO<>(contractService.rejectContractByTenant(contractIdDTO));
+    fun rejectContractByTenant(
+        @RequestBody contractIdDTO: ContractIdDTO
+    ): ResponseDTO<String> {
+        return ResponseDTO(
+            contractService.rejectContractByTenant(contractIdDTO)
+        )
     }
 
     @PostMapping("/submitContract")
-    public ResponseDTO<String> submitContract(@RequestBody ContractIdDTO contractIdDTO){
-        return new ResponseDTO<>(contractService.submitContract(contractIdDTO));
+    fun submitContract(
+        @RequestBody contractIdDTO: ContractIdDTO
+    ): ResponseDTO<String> {
+        return ResponseDTO(
+            contractService.submitContract(contractIdDTO)
+        )
     }
 
     @GetMapping("/getContractListByLandLordId")
-    public ResponseDTO<List<ContractRow>> getContractListByLandLordId(@RequestParam String landLordId){
-        return new ResponseDTO<>(contractService.getContractListByLandLordId(landLordId));
+    fun getContractListByLandLordId(
+        @RequestParam landLordId: String
+    ): ResponseDTO<List<ContractRow>> {
+        return ResponseDTO(
+            contractService.getContractListByLandLordId(landLordId)
+        )
     }
 }

@@ -1,37 +1,47 @@
-package com.elf.vipForElf.web.controller;
+package com.elf.vipForElf.web.controller
 
-import com.elf.vipForElf.domain.floor.service.FloorService;
-import com.elf.vipForElf.domain.floor.vo.FloorInfoVO;
-import com.elf.vipForElf.domain.floor.vo.FloorListVO;
-import com.elf.vipForElf.web.dto.NewFloorDTO;
-import com.elf.vipForElf.web.dto.ResponseDTO;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.*;
+import com.elf.vipForElf.domain.floor.service.FloorService
+import com.elf.vipForElf.domain.floor.vo.FloorInfoVO
+import com.elf.vipForElf.domain.floor.vo.FloorListVO
+import com.elf.vipForElf.web.dto.NewFloorDTO
+import com.elf.vipForElf.web.dto.ResponseDTO
+import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.web.bind.annotation.*
 
-import java.util.List;
 @Tag(name = "층", description = "층 관련 API")
 @RestController
 @RequestMapping("/floor")
-public class FloorController {
-    private final FloorService floorService;
+class FloorController(
+    private val floorService: FloorService
+) {
 
-    public FloorController(FloorService floorService) {
-        this.floorService = floorService;
+    @PostMapping("/createFloor")
+    fun createFloor(
+        @RequestBody newFloorDTO: NewFloorDTO
+    ): ResponseDTO<FloorInfoVO> {
+        return ResponseDTO(
+            floorService.createFloor(newFloorDTO)
+        )
     }
 
-    @PostMapping(value = "/createFloor")
-    public ResponseDTO<FloorInfoVO> createFloor(@RequestBody NewFloorDTO newFloorDTO) throws IllegalAccessException {
-        return new ResponseDTO<>(floorService.createFloor(newFloorDTO));
+    @GetMapping("/getFloorById")
+    fun getFloorById(
+        @RequestParam id: Long
+    ): ResponseDTO<FloorInfoVO> {
+        return ResponseDTO(
+            floorService.getFloorById(id)
+        )
     }
 
-    @GetMapping(value = "/getFloorById")
-    public ResponseDTO<FloorInfoVO> getFloorById(@RequestParam Long id){
-        return new ResponseDTO<>(floorService.getFloorById(id));
-    }
-
-    @GetMapping(value = "/getFloorList")
-    public ResponseDTO<List<FloorListVO>> getFloorList(@RequestParam(required = false) String searchCondition, Integer page, Integer size){
-        if(searchCondition==null) searchCondition="";
-        return new ResponseDTO<>(floorService.getFloorList(searchCondition,page,size));
+    @GetMapping("/getFloorList")
+    fun getFloorList(
+        @RequestParam(required = false) searchCondition: String?,
+        @RequestParam page: Int,
+        @RequestParam size: Int
+    ): ResponseDTO<List<FloorListVO>> {
+        val condition = searchCondition ?: ""
+        return ResponseDTO(
+            floorService.getFloorList(condition, page, size)
+        )
     }
 }
