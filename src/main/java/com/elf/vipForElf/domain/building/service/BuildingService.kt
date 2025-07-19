@@ -15,7 +15,7 @@ interface BuildingService {
 
     fun deleteBuildingById(id: Long): String
 
-    fun existById(id: Long): Boolean
+    fun existById(id: Long?): Boolean
 
-    fun getBuildingEntityById(id: Long): BuildingEntity
+    fun getBuildingEntityById(id: Long?): BuildingEntity
 }

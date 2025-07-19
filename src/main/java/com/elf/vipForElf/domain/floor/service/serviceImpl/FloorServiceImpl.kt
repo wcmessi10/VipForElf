@@ -1,56 +1,45 @@
-package com.elf.vipForElf.domain.floor.service.serviceImpl;
+package com.elf.vipForElf.domain.floor.service.serviceImpl
 
-import com.elf.vipForElf.domain.building.entity.BuildingEntity;
-import com.elf.vipForElf.domain.building.service.BuildingService;
-import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
-import com.elf.vipForElf.domain.floor.entity.FloorEntity;
-import com.elf.vipForElf.domain.floor.repository.FloorRepository;
-import com.elf.vipForElf.domain.floor.service.FloorService;
-import com.elf.vipForElf.domain.floor.vo.FloorInfoVO;
-import com.elf.vipForElf.domain.floor.vo.FloorListVO;
-import com.elf.vipForElf.web.dto.NewFloorDTO;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.elf.vipForElf.domain.building.service.BuildingService
+import com.elf.vipForElf.domain.floor.entity.FloorEntity
+import com.elf.vipForElf.domain.floor.repository.FloorRepository
+import com.elf.vipForElf.domain.floor.service.FloorService
+import com.elf.vipForElf.domain.floor.vo.FloorInfoVO
+import com.elf.vipForElf.domain.floor.vo.FloorListVO
+import com.elf.vipForElf.web.dto.NewFloorDTO
+import org.springframework.data.domain.PageRequest
+import org.springframework.stereotype.Service
 
 @Service
-public class FloorServiceImpl implements FloorService {
-    private final FloorRepository floorRepository;
-    private final BuildingService buildingService;
-    public FloorServiceImpl(FloorRepository floorRepository, BuildingService buildingService) {
-        this.floorRepository = floorRepository;
-        this.buildingService = buildingService;
-    }
+class FloorServiceImpl(
+    private val floorRepository: FloorRepository,
+    private val buildingService: BuildingService
+) : FloorService {
 
-    @Override
-    public FloorInfoVO createFloor(NewFloorDTO newFloorDTO) throws IllegalAccessException {
-        if(!buildingService.existById(newFloorDTO.getBuildingId())){
-            throw new IllegalAccessException("Buidling Id is not exists");
+    @Throws(IllegalAccessException::class)
+    override fun createFloor(newFloorDTO: NewFloorDTO): FloorInfoVO {
+        if (!buildingService.existById(newFloorDTO.buildingId)) {
+            throw IllegalAccessException("Building Id does not exist")
         }
-        BuildingInfoVO buildingInfoVO = buildingService.getBuildingById(newFloorDTO.getBuildingId());
-        BuildingEntity buildingEntity = buildingService.getBuildingEntityById(newFloorDTO.getBuildingId());
-        FloorInfoVO floorInfoVO = new FloorInfoVO(newFloorDTO,buildingEntity);
-        return floorRepository.createFloor(floorInfoVO);
+
+        val buildingEntity = buildingService.getBuildingEntityById(newFloorDTO.buildingId)
+        val floorInfoVO = FloorInfoVO(newFloorDTO, buildingEntity)
+
+        return floorRepository.createFloor(floorInfoVO)
     }
 
-    @Override
-    public FloorInfoVO getFloorById(Long id) {
-        return floorRepository.getFloorById(id);
-    }
+    override fun getFloorById(id: Long): FloorInfoVO =
+        floorRepository.getFloorById(id)
 
-    @Override
-    public List<FloorListVO> getFloorList(String searchCondition, Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page,size);
-        if(searchCondition.equals("")){
-            return floorRepository.findAll(pageable);
+    override fun getFloorList(searchCondition: String, page: Int, size: Int): List<FloorListVO> {
+        val pageable = PageRequest.of(page, size)
+        return if (searchCondition.isBlank()) {
+            floorRepository.findAll(pageable)
+        } else {
+            floorRepository.findBySearchCondition(searchCondition, pageable)
         }
-        return floorRepository.findBySearchCondition(searchCondition,pageable);
     }
 
-    @Override
-    public FloorEntity getFloorEntityById(Long id) {
-        return floorRepository.getFloorEntityById(id);
-    }
+    override fun getFloorEntityById(id: Long): FloorEntity =
+        floorRepository.getFloorEntityById(id)
 }

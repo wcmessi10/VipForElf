@@ -30,6 +30,14 @@ class BuildingEntity(
     @Column(name = "create_date")
     var createDate: OffsetDateTime = OffsetDateTime.now()
 ) {
+    constructor() : this(
+        buildingName = "",
+        address = null,
+        buildingNumber = null,
+        businessNumber = null,
+        zipcode = null
+    )
+
     constructor(buildingInfoVO: BuildingInfoVO) : this(
         buildingName = buildingInfoVO.buildingName,
         buildingNumber = buildingInfoVO.buildingNumber,

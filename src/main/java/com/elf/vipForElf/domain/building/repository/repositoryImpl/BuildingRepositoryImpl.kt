@@ -28,7 +28,7 @@ class BuildingRepositoryImpl(
             .map(::BuildingInfoVO)
             .orElse(null)
 
-    override fun existsById(id: Long): Boolean =
+    override fun existsById(id: Long?): Boolean =
         buildingJPARepository.existsById(id)
 
     override fun findAll(pageable: Pageable): List<BuildingListVO> =
@@ -50,7 +50,7 @@ class BuildingRepositoryImpl(
             "Failed Delete because this is not exist"
         }
 
-    override fun getBuildingEntityById(id: Long): BuildingEntity =
+    override fun getBuildingEntityById(id: Long?): BuildingEntity =
         buildingJPARepository.findById(id)
             .orElseThrow { NoSuchElementException("Building not found with id: $id") }
 

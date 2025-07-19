@@ -1,37 +1,37 @@
-package com.elf.vipForElf.domain.floor.entity;
+package com.elf.vipForElf.domain.floor.entity
 
-import com.elf.vipForElf.domain.building.entity.BuildingEntity;
-import com.elf.vipForElf.domain.floor.vo.FloorInfoVO;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.elf.vipForElf.domain.building.entity.BuildingEntity
+import com.elf.vipForElf.domain.floor.vo.FloorInfoVO
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "elf_t_floor")
-@Getter
-@Setter
-@NoArgsConstructor
-public class FloorEntity {
+class FloorEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    var id: Long? = null,
 
     @Column(name = "floor_number", nullable = false)
-    public Integer floorNumber;
+    var floorNumber: Int,
 
     @Column(name = "purpose", length = 255)
-    public String purpose = "Mixed-use";
+    var purpose: String = "Mixed-use",
 
     @ManyToOne
     @JoinColumn(name = "building_id", nullable = false)
-    public BuildingEntity building;
+    var building: BuildingEntity
+) {
+    constructor() : this(
+        id = null,
+        floorNumber = 0,
+        purpose = "Mixed-use",
+        building = BuildingEntity()
+    )
 
-    public FloorEntity floorEntity(FloorInfoVO floorInfoVO){
-        FloorEntity floorEntity = new FloorEntity();
-        floorEntity.setFloorNumber(floorInfoVO.getFloorNumber());
-        floorEntity.setPurpose(floorInfoVO.getPurpose());
-        floorEntity.setBuilding(floorInfoVO.getBuildingEntity());
-        return floorEntity;
+    fun applyFromVO(floorInfoVO: FloorInfoVO): FloorEntity {
+        this.floorNumber = floorInfoVO.floorNumber
+        this.purpose = floorInfoVO.purpose ?: "Mixed-use"
+        this.building = floorInfoVO.buildingEntity
+        return this
     }
 }

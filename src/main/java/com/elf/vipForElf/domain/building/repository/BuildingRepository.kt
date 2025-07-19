@@ -13,7 +13,7 @@ interface BuildingRepository {
 
     fun getById(id: Long): BuildingInfoVO?
 
-    fun existsById(id: Long): Boolean
+    fun existsById(id: Long?): Boolean
 
     fun findAll(pageable: Pageable): List<BuildingListVO>
 
@@ -21,5 +21,5 @@ interface BuildingRepository {
 
     fun deleteBuildingById(id: Long): String
 
-    fun getBuildingEntityById(id: Long): BuildingEntity
+    fun getBuildingEntityById(id: Long?): BuildingEntity
 }

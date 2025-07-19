@@ -35,9 +35,9 @@ class BuildingServiceImpl(
     override fun deleteBuildingById(id: Long): String =
         buildingRepository.deleteBuildingById(id)
 
-    override fun existById(id: Long): Boolean =
+    override fun existById(id: Long?): Boolean =
         buildingRepository.existsById(id)
 
-    override fun getBuildingEntityById(id: Long): BuildingEntity =
+    override fun getBuildingEntityById(id: Long?): BuildingEntity =
         buildingRepository.getBuildingEntityById(id)
 }
