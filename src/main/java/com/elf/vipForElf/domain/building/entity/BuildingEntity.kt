@@ -1,46 +1,40 @@
-package com.elf.vipForElf.domain.building.entity;
+package com.elf.vipForElf.domain.building.entity
 
-import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.OffsetDateTime;
+import com.elf.vipForElf.domain.building.vo.BuildingInfoVO
+import jakarta.persistence.*
+import java.time.OffsetDateTime
 
 @Entity
 @Table(name = "elf_t_building")
-@Getter
-@Setter
-@NoArgsConstructor
-public class BuildingEntity {
+class BuildingEntity(
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    var id: Long? = null,
 
     @Column(name = "building_name", nullable = false, length = 255)
-    public String buildingName;
+    var buildingName: String,
 
     @Column(name = "address", length = 255)
-    public String address;
+    var address: String? = null,
 
     @Column(name = "building_number", length = 10)
-    public String buildingNumber;
+    var buildingNumber: String? = null,
 
     @Column(name = "business_number", length = 50)
-    public String businessNumber;
+    var businessNumber: String? = null,
 
     @Column(name = "zipcode", length = 5)
-    public String zipcode;
+    var zipcode: String? = null,
 
     @Column(name = "create_date")
-    public OffsetDateTime createDate = OffsetDateTime.now();
-
-    public BuildingEntity(BuildingInfoVO buildingInfoVO){
-        this.buildingName = buildingInfoVO.getBuildingName();
-        this.buildingNumber = buildingInfoVO.getBuildingNumber();
-        this.businessNumber = buildingInfoVO.getBusinessNumber();
-        this.address = buildingInfoVO.getAddress();
-        this.zipcode = buildingInfoVO.getZipcode();
-    }
+    var createDate: OffsetDateTime = OffsetDateTime.now()
+) {
+    constructor(buildingInfoVO: BuildingInfoVO) : this(
+        buildingName = buildingInfoVO.buildingName,
+        buildingNumber = buildingInfoVO.buildingNumber,
+        businessNumber = buildingInfoVO.businessNumber,
+        address = buildingInfoVO.address,
+        zipcode = buildingInfoVO.zipcode
+    )
 }

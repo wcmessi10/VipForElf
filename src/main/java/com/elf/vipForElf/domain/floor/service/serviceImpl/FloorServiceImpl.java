@@ -1,10 +1,10 @@
 package com.elf.vipForElf.domain.floor.service.serviceImpl;
 
 import com.elf.vipForElf.domain.building.entity.BuildingEntity;
+import com.elf.vipForElf.domain.building.service.BuildingService;
 import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
 import com.elf.vipForElf.domain.floor.entity.FloorEntity;
 import com.elf.vipForElf.domain.floor.repository.FloorRepository;
-import com.elf.vipForElf.domain.building.service.BuildingService;
 import com.elf.vipForElf.domain.floor.service.FloorService;
 import com.elf.vipForElf.domain.floor.vo.FloorInfoVO;
 import com.elf.vipForElf.domain.floor.vo.FloorListVO;
@@ -29,7 +29,7 @@ public class FloorServiceImpl implements FloorService {
         if(!buildingService.existById(newFloorDTO.getBuildingId())){
             throw new IllegalAccessException("Buidling Id is not exists");
         }
-        BuildingInfoVO buildingInfoVO = buildingService.getBuildingById(newFloorDTO.getBuildingId()).get();
+        BuildingInfoVO buildingInfoVO = buildingService.getBuildingById(newFloorDTO.getBuildingId());
         BuildingEntity buildingEntity = buildingService.getBuildingEntityById(newFloorDTO.getBuildingId());
         FloorInfoVO floorInfoVO = new FloorInfoVO(newFloorDTO,buildingEntity);
         return floorRepository.createFloor(floorInfoVO);

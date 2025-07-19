@@ -8,6 +8,6 @@ data class BuildingListVO(
 ) {
     constructor(buildingEntity: BuildingEntity) : this(
         buildingName = buildingEntity.buildingName,
-        buildingNumber = buildingEntity.buildingNumber
+        buildingNumber = buildingEntity.buildingNumber ?: ""
     )
 }

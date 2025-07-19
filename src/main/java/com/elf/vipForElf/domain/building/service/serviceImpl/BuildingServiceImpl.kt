@@ -1,65 +1,43 @@
-package com.elf.vipForElf.domain.building.service.serviceImpl;
+package com.elf.vipForElf.domain.building.service.serviceImpl
 
-import com.elf.vipForElf.domain.building.entity.BuildingEntity;
-import com.elf.vipForElf.domain.building.repository.BuildingRepository;
-import com.elf.vipForElf.domain.building.service.BuildingService;
-import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
-import com.elf.vipForElf.domain.building.vo.BuildingListVO;
-import com.elf.vipForElf.web.dto.NewBuildingDTO;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
+import com.elf.vipForElf.domain.building.entity.BuildingEntity
+import com.elf.vipForElf.domain.building.repository.BuildingRepository
+import com.elf.vipForElf.domain.building.service.BuildingService
+import com.elf.vipForElf.domain.building.vo.BuildingInfoVO
+import com.elf.vipForElf.domain.building.vo.BuildingListVO
+import com.elf.vipForElf.web.dto.NewBuildingDTO
+import org.springframework.data.domain.PageRequest
+import org.springframework.stereotype.Service
 
 @Service
-public class BuildingServiceImpl implements BuildingService {
+class BuildingServiceImpl(
+    private val buildingRepository: BuildingRepository
+) : BuildingService {
 
-    private final BuildingRepository buildingRepository;
-
-    public BuildingServiceImpl(BuildingRepository buildingRepository) {
-        this.buildingRepository = buildingRepository;
-    }
-
-    @Override
-    public BuildingInfoVO putBuilding(NewBuildingDTO newBuildingDTO) {
-        BuildingInfoVO buildingInfoVO = new BuildingInfoVO(newBuildingDTO);
-        return buildingRepository.create(buildingInfoVO);
-    }
-
-    @Override
-    public Optional<BuildingInfoVO> getBuildingById(Long id) {
-        if(buildingRepository.existsById(id)){
-            return buildingRepository.getById(id);
+    override fun putBuilding(newBuildingDTO: NewBuildingDTO): BuildingInfoVO =
+        BuildingInfoVO(newBuildingDTO).let {
+            buildingRepository.create(it)
         }
-        return Optional.empty();
-    }
 
-    @Override
-    public List<BuildingListVO> getBuildingList(String searchCondition, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        if (searchCondition.equals("")){
-            return buildingRepository.findAll(pageable);
-        }else {
-            return buildingRepository.findBySearchCondition(searchCondition,pageable);
+    override fun getBuildingById(id: Long): BuildingInfoVO? =
+        buildingRepository.getById(id).takeIf { buildingRepository.existsById(id) }
+
+
+    override fun getBuildingList(searchCondition: String, page: Int, size: Int): List<BuildingListVO> {
+        val pageable = PageRequest.of(page, size)
+        return if (searchCondition.isBlank()) {
+            buildingRepository.findAll(pageable)
+        } else {
+            buildingRepository.findBySearchCondition(searchCondition, pageable)
         }
     }
 
-    @Override
-    public String deleteBuildingById(Long id) {
-        return buildingRepository.deleteBuildingById(id);
-    }
+    override fun deleteBuildingById(id: Long): String =
+        buildingRepository.deleteBuildingById(id)
 
-    @Override
-    public Boolean existById(Long id) {
-        return buildingRepository.existsById(id);
-    }
+    override fun existById(id: Long): Boolean =
+        buildingRepository.existsById(id)
 
-    @Override
-    public BuildingEntity getBuildingEntityById(Long id) {
-        return buildingRepository.getBuildingEntityById(id);
-    }
-
-
+    override fun getBuildingEntityById(id: Long): BuildingEntity =
+        buildingRepository.getBuildingEntityById(id)
 }

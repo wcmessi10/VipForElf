@@ -1,19 +1,25 @@
-package com.elf.vipForElf.domain.building.repository;
+package com.elf.vipForElf.domain.building.repository
 
-import com.elf.vipForElf.domain.building.entity.BuildingEntity;
-import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
-import com.elf.vipForElf.domain.building.vo.BuildingListVO;
-import org.springframework.data.domain.Pageable;
+import com.elf.vipForElf.domain.building.entity.BuildingEntity
+import com.elf.vipForElf.domain.building.vo.BuildingInfoVO
+import com.elf.vipForElf.domain.building.vo.BuildingListVO
+import org.springframework.data.domain.Pageable
+import org.springframework.stereotype.Repository
 
-import java.util.List;
-import java.util.Optional;
+@Repository
+interface BuildingRepository {
 
-public interface BuildingRepository {
-    BuildingInfoVO create(BuildingInfoVO buildingInfoVO);
-    Optional<BuildingInfoVO> getById(Long id);
-    boolean existsById(Long id);
-    List<BuildingListVO> findAll(Pageable pageable);
-    List<BuildingListVO> findBySearchCondition(String searchCondition, Pageable pageable);
-    String deleteBuildingById(Long id);
-    BuildingEntity getBuildingEntityById(Long id);
+    fun create(buildingInfoVO: BuildingInfoVO): BuildingInfoVO
+
+    fun getById(id: Long): BuildingInfoVO?
+
+    fun existsById(id: Long): Boolean
+
+    fun findAll(pageable: Pageable): List<BuildingListVO>
+
+    fun findBySearchCondition(searchCondition: String, pageable: Pageable): List<BuildingListVO>
+
+    fun deleteBuildingById(id: Long): String
+
+    fun getBuildingEntityById(id: Long): BuildingEntity
 }

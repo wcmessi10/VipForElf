@@ -1,77 +1,59 @@
-package com.elf.vipForElf.domain.building.repository.repositoryImpl;
+package com.elf.vipForElf.domain.building.repository.repositoryImpl
 
-import com.elf.vipForElf.domain.building.entity.BuildingEntity;
-import com.elf.vipForElf.domain.building.repository.BuildingRepository;
-import com.elf.vipForElf.domain.building.repository.JPA.BuildingJPARepository;
-import com.elf.vipForElf.domain.building.vo.BuildingInfoVO;
-import com.elf.vipForElf.domain.building.vo.BuildingListVO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Optional;
+import com.elf.vipForElf.domain.building.entity.BuildingEntity
+import com.elf.vipForElf.domain.building.repository.BuildingRepository
+import com.elf.vipForElf.domain.building.repository.JPA.BuildingJPARepository
+import com.elf.vipForElf.domain.building.vo.BuildingInfoVO
+import com.elf.vipForElf.domain.building.vo.BuildingListVO
+import org.springframework.data.domain.Pageable
+import org.springframework.stereotype.Repository
 
 @Repository
-public class BuildingRepositoryImpl implements BuildingRepository {
-    private final BuildingJPARepository buildingJPARepository;
+class BuildingRepositoryImpl(
+    private val buildingJPARepository: BuildingJPARepository
+) : BuildingRepository {
 
-    public BuildingRepositoryImpl(BuildingJPARepository buildingJPARepository) {
-        this.buildingJPARepository = buildingJPARepository;
-    }
+    override fun create(buildingInfoVO: BuildingInfoVO): BuildingInfoVO {
+        val buildingEntity = BuildingEntity(buildingInfoVO)
 
-    @Override
-    public BuildingInfoVO create(BuildingInfoVO buildingInfoVO) {
-        BuildingEntity buildingEntity = new BuildingEntity(buildingInfoVO);
-        if(existsByBuildingNumber(buildingEntity.getBuildingNumber())){
-            throw new IllegalArgumentException("Already existed Building Number");
+        if (existsByBuildingNumber(buildingEntity.buildingNumber)) {
+            throw IllegalArgumentException("Already existed Building Number")
         }
-        return new BuildingInfoVO(buildingJPARepository.save(buildingEntity));
 
+        return BuildingInfoVO(buildingJPARepository.save(buildingEntity))
     }
 
-    @Override
-    public Optional<BuildingInfoVO> getById(Long id) {
-        return buildingJPARepository.findById(id).map(
-                BuildingInfoVO::new
-        );
-    }
+    override fun getById(id: Long): BuildingInfoVO? =
+        buildingJPARepository.findById(id)
+            .map(::BuildingInfoVO)
+            .orElse(null)
 
-    @Override
-    public boolean existsById(Long id) {
-        return buildingJPARepository.existsById(id);
-    }
+    override fun existsById(id: Long): Boolean =
+        buildingJPARepository.existsById(id)
 
-    @Override
-    public List<BuildingListVO> findAll(Pageable pageable) {
+    override fun findAll(pageable: Pageable): List<BuildingListVO> =
+        buildingJPARepository.findAll(pageable)
+            .map(::BuildingListVO)
+            .toList()
 
-        Page<BuildingEntity> buildingEntityList = buildingJPARepository.findAll(pageable);
-        return buildingEntityList.stream().map(
-                BuildingListVO::new
-        ).toList();
-    }
+    override fun findBySearchCondition(searchCondition: String, pageable: Pageable): List<BuildingListVO> =
+        buildingJPARepository
+            .findByBuildingNameIgnoreCaseOrBuildingNumberIgnoreCase(searchCondition, searchCondition, pageable)
+            .map(::BuildingListVO)
+            .toList()
 
-    @Override
-    public List<BuildingListVO> findBySearchCondition(String searchCondition, Pageable pageable) {
-        return buildingJPARepository.findByBuildingNameIgnoreCaseOrBuildingNumberIgnoreCase(searchCondition,searchCondition, pageable)
-                .stream().map(BuildingListVO::new).toList();
-    }
-
-    @Override
-    public String deleteBuildingById(Long id) {
-        if(existsById(id)){
-            buildingJPARepository.deleteById(id);
-            return "Succeeded Delete";
+    override fun deleteBuildingById(id: Long): String =
+        if (existsById(id)) {
+            buildingJPARepository.deleteById(id)
+            "Succeeded Delete"
+        } else {
+            "Failed Delete because this is not exist"
         }
-        return "Failed Delete because this is not exist";
-    }
 
-    @Override
-    public BuildingEntity getBuildingEntityById(Long id) {
-        return buildingJPARepository.findById(id).get();
-    }
+    override fun getBuildingEntityById(id: Long): BuildingEntity =
+        buildingJPARepository.findById(id)
+            .orElseThrow { NoSuchElementException("Building not found with id: $id") }
 
-    public boolean existsByBuildingNumber(String buildingNumber){
-        return buildingJPARepository.existsByBuildingNumber(buildingNumber);
-    }
+    fun existsByBuildingNumber(buildingNumber: String?): Boolean =
+        buildingJPARepository.existsByBuildingNumber(buildingNumber)
 }

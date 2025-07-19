@@ -44,6 +44,8 @@ dependencies {
 	implementation 'io.micrometer:micrometer-registry-prometheus'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+	implementation "org.jetbrains.kotlin:kotlin-reflect"
+
 }
 kotlin {
 	jvmToolchain(21)

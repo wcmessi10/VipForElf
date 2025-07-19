@@ -30,7 +30,7 @@ class BuildingController(
     @GetMapping("/getBuildingById")
     fun getBuildingById(
         @RequestParam id: Long
-    ): ResponseDTO<Optional<BuildingInfoVO>> {
+    ): ResponseDTO<BuildingInfoVO?> {
         return ResponseDTO(
             buildingService.getBuildingById(id)
         )
